@@ -1,0 +1,68 @@
+<?php
+/**
+ * @var $user array|null
+ * @var $data array
+ * @var $amount array
+ */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>Data</title>
+    <link href='//fonts.googleapis.com/css?family=Lato:300' rel='stylesheet' type='text/css'>
+    <link href='/main.css' rel='stylesheet' type='text/css'>
+</head>
+<body class="sql-data">
+
+<b>Hello, <?= $user['login']; ?></b> <a href="/logout">Logout</a>
+
+<br>
+<br>
+
+<table border="1">
+    <tr>
+        <th>id</th>
+        <th>user</th>
+        <th>money</th>
+        <th></th>
+    </tr>
+    <tr>
+        <th></th>
+        <th></th>
+        <th>
+            <form action="/data">
+                <input type="text" name="amount" value="<?= $amount ?>">
+                <input type="submit" value="OK">
+            </form>
+        </th>
+        <th></th>
+    </tr>
+    <?php foreach ($data as $row): ?>
+        <tr>
+            <td><?= $row[0] ?></td>
+            <td><?= $row[1] ?></td>
+            <td><?= $row[2] ?></td>
+            <td><a href="/data/del/<?=$row[0]?>">del</a></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
+<br>
+<br>
+<form method="post" action="/data">
+    <table border="1">
+        <tr>
+            <td>Amount:</td>
+            <td><input type="text" name="amount" value="0"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="hidden" name="user_id" value="<?=$user['id']?>">
+                <input type="submit" value="Save">
+            </td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
