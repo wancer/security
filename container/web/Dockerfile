@@ -7,8 +7,8 @@ COPY ./conf.d /etc/nginx/conf.d/
 RUN mkdir -p /run/nginx
 
 RUN curl --silent --show-error https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer
-# RUN curl -LsS https://symfony.com/installer -o /usr/local/bin/symfony && chmod o+x /usr/local/bin/symfony
 
 EXPOSE 80
+WORKDIR /var/www
 
-CMD ["sh", "-c", "nginx && php-fpm"]
+CMD composer install && sh -c nginx && php-fpm
